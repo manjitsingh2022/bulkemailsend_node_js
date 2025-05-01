@@ -10,7 +10,6 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 (async () => {
   const recipients = await getRecipients();
-console.log(recipients,'valssls')
   for (const email of recipients) {
     const mailOptions = {
       from: `"My App" <${process.env.EMAIL_USER}>`,
