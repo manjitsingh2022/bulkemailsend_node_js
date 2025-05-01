@@ -1,23 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 const transporter = require('./config');
-const recipients = require('./recipients');
-
-// const recipients = [
-//   'ebsharpreetkaur@gmail.com',
-//   'sudhir.dadwal@gmail.com',
-//   'manjitp95@gmail.com',
-//   'ebsmanjitsingh@gmail.com',
-//   // Add more Gmail addresses
-// ];
+const getRecipients = require('./recipients');
 
 const templatePath = path.join(__dirname, 'templates', 'email.html');
 const templateHtml = fs.readFileSync(templatePath, 'utf8');
 
-// Function to delay sending (throttle)
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 (async () => {
+  const recipients = await getRecipients();
+console.log(recipients,'valssls')
   for (const email of recipients) {
     const mailOptions = {
       from: `"My App" <${process.env.EMAIL_USER}>`,
